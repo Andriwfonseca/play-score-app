@@ -1,0 +1,80 @@
+"use client";
+
+import { useScore } from "@/lib/useScore";
+import { ScoreCard } from "@/components/ScoreCard";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Link from "next/link";
+
+export default function Truco() {
+  const {
+    scores,
+    wins,
+    isGameOver,
+    winner,
+    addPoint,
+    subtractPoint,
+    resetGame,
+    resetAll,
+  } = useScore({ team1: 0, team2: 0 }, 12);
+
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center bg-purple-900 p-4 sm:p-8">
+      <h1 className="text-4xl sm:text-5xl font-bold text-white mb-8 sm:mb-12">
+        Marcador de Truco
+      </h1>
+      {isGameOver && (
+        <Alert className="mb-8 max-w-md bg-white shadow-md rounded-lg">
+          <AlertTitle className="text-purple-800">Fim de Jogo!</AlertTitle>
+          <AlertDescription className="text-gray-600">
+            {winner === "team1" ? "Nós" : "Eles"} venceram com 12 pontos ou
+            mais!
+          </AlertDescription>
+        </Alert>
+      )}
+      <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-8">
+        <ScoreCard
+          teamName="Nós"
+          score={scores.team1}
+          wins={wins.team1}
+          onAddPoint={(points) => addPoint("team1", points)}
+          onSubtractPoint={() => subtractPoint("team1", 1)}
+          isGameOver={isGameOver}
+          mode="truco"
+        />
+        <ScoreCard
+          teamName="Eles"
+          score={scores.team2}
+          wins={wins.team2}
+          onAddPoint={(points) => addPoint("team2", points)}
+          onSubtractPoint={() => subtractPoint("team2", 1)}
+          isGameOver={isGameOver}
+          mode="truco"
+        />
+      </div>
+      <div className="mt-8 sm:mt-12 space-x-4">
+        <Button
+          onClick={resetGame}
+          disabled={!isGameOver}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg cursor-pointer"
+        >
+          Novo Jogo
+        </Button>
+        <Button
+          onClick={resetAll}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg cursor-pointer"
+        >
+          Resetar Tudo
+        </Button>
+        <Link href="/">
+          <Button
+            variant="outline"
+            className="border-purple-600 text-purple-600 hover:bg-purple-100 font-medium py-2 px-6 rounded-lg cursor-pointer"
+          >
+            Voltar
+          </Button>
+        </Link>
+      </div>
+    </main>
+  );
+}
