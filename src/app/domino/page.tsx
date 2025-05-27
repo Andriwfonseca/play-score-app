@@ -52,24 +52,26 @@ export default function Domino() {
           mode="domino"
         />
       </div>
-      <div className="mt-8 sm:mt-12 space-x-4">
-        <Button
-          onClick={resetGame}
-          disabled={!isGameOver}
-          className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg cursor-pointer"
-        >
-          Novo Jogo
-        </Button>
-        <Button
-          onClick={resetAll}
-          className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-lg cursor-pointer"
-        >
-          Resetar Tudo
-        </Button>
-        <Link href="/">
+      <div className="mt-8 w-full mx-10 sm:mt-12 flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
+        <div className="flex flex-nowrap gap-2 justify-center">
+          <Button
+            onClick={resetGame}
+            disabled={!isGameOver}
+            className="w-1/2 min-w-0 px-1 sm:px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 rounded-lg cursor-pointer"
+          >
+            Novo Jogo
+          </Button>
+          <Button
+            onClick={resetAll}
+            className="w-1/2 min-w-0 px-1 sm:px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 rounded-lg cursor-pointer"
+          >
+            Resetar Tudo
+          </Button>
+        </div>
+        <Link href="/" className="w-full sm:w-auto px-1 sm:px-0">
           <Button
             variant="outline"
-            className="border-purple-600 text-purple-600 hover:bg-purple-100 font-medium py-2 px-6 rounded-lg cursor-pointer"
+            className="w-full border-purple-600 text-purple-600 hover:bg-purple-100 font-medium py-2 rounded-lg cursor-pointer"
           >
             Voltar
           </Button>
